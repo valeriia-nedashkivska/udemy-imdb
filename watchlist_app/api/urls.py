@@ -4,7 +4,8 @@ from rest_framework.routers import DefaultRouter
 # from watchlist_app.api.views import movie_list, movie_details
 from watchlist_app.api.views import (WatchListAV, WatchDetailAV, StreamPlatformAV,
                                      StreamPlatformDetailAV, ReviewList,
-                                     ReviewDetail, ReviewCreate, StreamPlatformVS)
+                                     ReviewDetail, ReviewCreate, StreamPlatformVS,
+                                     UserReview)
 
 router = DefaultRouter()
 router.register('stream', StreamPlatformVS, basename='streamplatform')
@@ -22,4 +23,6 @@ urlpatterns = [
     path('<int:pk>/review-create/', ReviewCreate.as_view(), name='review-create'),
     path('<int:pk>/reviews/', ReviewList.as_view(), name='review-list'),
     path('review/<int:pk>/', ReviewDetail.as_view(), name='review-detail'),
+
+    path('reviews/', UserReview.as_view(), name='user-review-detail'),
 ]
