@@ -1,6 +1,6 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework import viewsets, generics, status
+from rest_framework import viewsets, generics, status, filters
 from rest_framework.throttling import UserRateThrottle, AnonRateThrottle, ScopedRateThrottle
 from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
@@ -170,11 +170,17 @@ class StreamPlatformDetailAV(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-class WatchList(generics.ListAPIView):
+class WatchListGV(generics.ListAPIView):
     queryset = Watchlist.objects.all()
     serializer_class = WatchlistSerializer
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['title', 'platform__name']
+    # filter_backends = [DjangoFilterBackend]
+    # filterset_fields = ['title', 'platform__name']
+
+    # filter_backends = [filters.SearchFilter]
+    # search_fields = ['title', 'platform__name']
+
+    filter_backends = [filters.OrderingFilter]
+    ordering_fields = ['avg_rating']
 
 
 class WatchListAV(APIView):
