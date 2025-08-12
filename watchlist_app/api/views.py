@@ -5,7 +5,7 @@ from rest_framework.throttling import UserRateThrottle, AnonRateThrottle, Scoped
 from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from django.shortcuts import get_object_or_404
-from watchlist_app.api.pagination import WatchlistPagination, WatchlistLOPagination
+from watchlist_app.api.pagination import WatchlistPagination, WatchlistLOPagination, WatchListCPagination
 from watchlist_app.api.serializers import WatchlistSerializer, StreamPlatformSerializer, ReviewSerializer
 from watchlist_app.api.permissions import IsAdminOrReadOnly, IsReviewUserOrReadOnly
 from watchlist_app.models import Watchlist, StreamPlatform, Review
@@ -174,7 +174,7 @@ class StreamPlatformDetailAV(APIView):
 class WatchListGV(generics.ListAPIView):
     queryset = Watchlist.objects.all()
     serializer_class = WatchlistSerializer
-    pagination_class = WatchlistLOPagination
+    pagination_class = WatchListCPagination
     # filter_backends = [DjangoFilterBackend]
     # filterset_fields = ['title', 'platform__name']
 
