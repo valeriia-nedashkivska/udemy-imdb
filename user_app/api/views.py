@@ -4,6 +4,8 @@ from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from user_app import models
 from user_app.api.serializers import RegistrationSerializer
+
+
 # from rest_framework_simplejwt.tokens import RefreshToken
 # from rest_framework_simplejwt.exceptions import AuthenticationFailed
 
@@ -44,4 +46,4 @@ def registration_view(request):
         else:
             data = serializer.errors
 
-        return Response(data)
+        return Response(data, status=status.HTTP_201_CREATED)
